@@ -22,14 +22,12 @@ namespace technology2
             string username = txtUsername.Text;
             string password = txtPassword.Text;
 
-            // Example: hard-coded login
             if (username == "admin" && password == "12345")
             {
-                // Create and show Form2
                 Form2 dashboard = new Form2();
-                dashboard.Show();   // Show Form2
+                dashboard.Show(); 
 
-                this.Hide();        // Hide Form1 (login form)
+                this.Hide();   
             }
             else
             {
