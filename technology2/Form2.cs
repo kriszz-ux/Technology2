@@ -45,40 +45,34 @@ namespace technology2
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            // Check if a row is selected
             if (dgvPatients.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select a patient to update.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; // Exit the method if no row is selected
+                return; 
             }
 
-            // Fetch selected row
             DataGridViewRow selectedRow = dgvPatients.SelectedRows[0];
 
-            // Validate and convert age
             int age;
             if (!int.TryParse(txtAge.Text, out age))
             {
                 MessageBox.Show("Please enter a valid age.");
-                return; // Exit if age is invalid
+                return; 
             }
 
-            // Validate and convert consultation date
             DateTime consultationDate;
             if (!DateTime.TryParse(dtpConsultationDate.Value.ToString(), out consultationDate))
             {
                 MessageBox.Show("Please enter a valid consultation date.");
-                return; // Exit if the date is invalid
+                return; 
             }
 
-            // Get other values from textboxes
             string name = txtName.Text;
             string gender = txtGender.Text;
             string contact = txtContact.Text;
             string diagnosis = txtDiagnosis.Text;
             string address = txtAddress.Text;
 
-            // SQL query to update the patient in the database
             string query = "UPDATE records SET name = @name, age = @age, gender = @gender, contact = @contact, " +
                "diagnosis = @diagnosis, address = @address, consultation_date = @consultationDate " +
                "WHERE patient_id = @patientId";
@@ -96,12 +90,11 @@ namespace technology2
                 cmd.Parameters.AddWithValue("@address", address);
                 cmd.Parameters.AddWithValue("@consultationDate", consultationDate);
 
-                cmd.ExecuteNonQuery(); // Execute the update query
+                cmd.ExecuteNonQuery();
 
                 MessageBox.Show("Patient updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            // Reload the patients to reflect the changes
             LoadPatients();
         }
 
